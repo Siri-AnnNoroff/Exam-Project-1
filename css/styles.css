@@ -14,3 +14,7 @@ h1 {
     font-family: "Cinzel";
     font-weight: 400;
 }
+
+i {
+    color: var(--light-text-color);
+}
