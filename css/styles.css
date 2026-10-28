@@ -7,14 +7,46 @@
 
 header, footer {
     background-color:var(--red-contrast-color);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
 
 h1 {
+    margin: 0px;
     color: var(--light-text-color);
     font-family: "Cinzel";
     font-weight: 400;
+    padding-left: 15px;
 }
 
 i {
     color: var(--light-text-color);
+}
+
+.icons {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding-right: 20px;
+}
+
+.icons a {
+  position: relative;
+  font-size: 24px;
+}
+
+.cart-badge {
+  position: absolute;
+  top: -4px;
+  right: -4px;
+  min-width: 12px;
+  height: 12px;
+  display: grid;
+  place-items: center;
+  border-radius: 100px;
+  background: var(--light-text-color);
+  color: var(--dark-text-color);
+  font-size: 10px;
+  font-weight: 700;
 }
