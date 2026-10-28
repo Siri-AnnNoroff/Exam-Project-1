@@ -1,0 +1,16 @@
+
+:root {
+    --red-contrast-color: #6B152F; 
+    --dark-text-color: #0A1037;
+    --light-text-color: #F9F0E0;
+}
+
+header, footer {
+    background-color:var(--red-contrast-color);
+}
+
+h1 {
+    color: var(--light-text-color);
+    font-family: "Cinzel";
+    font-weight: 400;
+}
