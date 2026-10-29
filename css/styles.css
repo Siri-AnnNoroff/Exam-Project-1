@@ -5,7 +5,7 @@
     --light-text-color: #F9F0E0;
 }
 
-header, footer {
+header {
     background-color:var(--red-contrast-color);
     display: flex;
     align-items: center;
@@ -49,4 +49,18 @@ i {
   color: var(--dark-text-color);
   font-size: 10px;
   font-weight: 700;
+}
+
+footer {
+    background-color: var(--red-contrast-color);
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    font-family: "Schibsted Grotesk";
+    padding: 10px;
+    font-size: 12px;
+}
+
+a {
+    text-decoration: none;
+    color: var(--light-text-color);
 }
