@@ -4,10 +4,21 @@
     --dark-text-color: #0A1037;
     --light-text-color: #F9F0E0;
 }
+
+*::before, ::after {
+    box-sizing:border-box;
+}
 html {
      font-family: "Schibsted Grotesk";
      background-color: var(--light-text-color);
       color: var(--dark-text-color);
+      overflow-x: hidden;
+
+}
+
+main {
+    margin-left: 25rem;
+    margin-right: 25rem;
 }
 header {
     background-color:var(--red-contrast-color);
@@ -24,11 +35,11 @@ h1 {
     padding-left: 15px;
 }
 
-h2 {
+h2, h3 {
+    text-transform: uppercase;
     font-size: 1.2rem;
     font-weight: 400;
     text-align: left;
-    margin: 0;
 }
 
 i {
@@ -141,6 +152,7 @@ a {
     text-transform: uppercase;
     font-size: 1.1rem;
     border-radius: 20px;
+    margin-top: auto;
 }
 
 .carousel-arrow {
@@ -188,4 +200,29 @@ a {
 .carousel-dot.active {
     background: var(--dark-text-color);
     border-color: var(--dark-text-color-color);
+}
+
+/*product grid*/
+
+.product.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 3rem;
+    width: 100%;
+    max-width: 100%;
+}
+
+.product-box {
+    border:solid 1px var(--red-contrast-color);
+    border-radius: 10px;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.product-box img {
+    height: 180px;
+    width: 100%;
+    object-fit: contain;
+    display: block;
 }

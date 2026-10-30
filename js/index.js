@@ -4,6 +4,24 @@ import { getProducts } from "./api.js";
 
 const currencySymbol = "$";
 
+async function firstFetch() {
+  const carousel = document.getElementById("carousel");
+  const grid = document.querySelector(".product.grid");
+
+  let products;
+  try {
+    products = await getProducts();
+  } catch (error) {
+    const message = "Failed to load products";
+    carousel.textContent = message;
+    grid.textContent = message;
+    console.error(message, error);
+    return;
+  }
+  buildCarousel(carousel, products.slice(0, 3));
+  products.forEach((product) => buildGrid(grid, product));
+}
+
 async function fetchCarousel() {
   const carousel = document.getElementById("carousel");
 
@@ -24,7 +42,7 @@ function createSlide(product) {
   image.src = product.image.url;
   image.alt = product.image.alt;
 
-  const name = document.createElement("h2");
+  const name = document.createElement("h3");
   name.textContent = product.title;
 
   const priceArea = document.createElement("div");
@@ -107,3 +125,42 @@ function buildCarousel(carousel, products) {
 }
 
 fetchCarousel();
+
+function buildGrid(grid, product) {
+  const productBox = document.createElement("div");
+  productBox.classList.add("product-box");
+
+  const productImage = document.createElement("img");
+  productImage.classList.add("product-image");
+  productImage.src = product.image.url;
+  productImage.alt = product.image.alt;
+
+  const name = document.createElement("h3");
+  name.textContent = product.title;
+
+  const priceArea = document.createElement("div");
+  priceArea.classList.add("carousel-price");
+
+  const price = document.createElement("p");
+  price.textContent = currencySymbol + product.price;
+
+  if (product.discountedPrice < product.price) {
+    price.classList.add("fullPrice");
+    const salePrice = document.createElement("p");
+    salePrice.classList.add("onSale");
+    salePrice.textContent = currencySymbol + product.discountedPrice;
+    priceArea.append(price, salePrice);
+  } else {
+    priceArea.appendChild(price);
+  }
+
+  const cta = document.createElement("a");
+  cta.classList.add("carousel-cta");
+  cta.textContent = "View product";
+  cta.href = `product/index.html?id=${product.id}`;
+
+  productBox.append(productImage, name, priceArea, cta);
+  grid.append(productBox);
+}
+
+firstFetch();
