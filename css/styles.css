@@ -4,7 +4,11 @@
     --dark-text-color: #0A1037;
     --light-text-color: #F9F0E0;
 }
-
+html {
+     font-family: "Schibsted Grotesk";
+     background-color: var(--light-text-color);
+      color: var(--dark-text-color);
+}
 header {
     background-color:var(--red-contrast-color);
     display: flex;
@@ -18,6 +22,13 @@ h1 {
     font-family: "Cinzel";
     font-weight: 400;
     padding-left: 15px;
+}
+
+h2 {
+    font-size: 1.2rem;
+    font-weight: 400;
+    text-align: left;
+    margin: 0;
 }
 
 i {
@@ -55,7 +66,7 @@ footer {
     background-color: var(--red-contrast-color);
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
-    font-family: "Schibsted Grotesk";
+   
     padding: 10px;
     font-size: 12px;
 }
@@ -63,4 +74,118 @@ footer {
 a {
     text-decoration: none;
     color: var(--light-text-color);
+}
+
+/*carousel*/
+
+.carousel-viewport {
+    position: relative;
+    overflow: hidden;    
+    max-width: 300px;  
+    justify-self: center;
+}
+
+.carousel-track {
+    display: flex;
+    transition: transform 0.8s ease-in-out;
+}
+
+.carousel-slide {
+    flex: 0 0 100%;
+    min-width: 0;
+    box-sizing: border-box;
+    padding-top: 30px;
+  
+}
+
+.carousel-slide img {
+    display: block;
+    width: 75%;        
+    aspect-ratio: 3 / 4;
+    object-fit: cover;
+    margin: 0 auto 30px;
+}
+
+.carousel-slide h2 {
+    text-transform: uppercase;
+    margin-bottom: 20px;
+}
+
+
+.carousel-price {
+    margin-bottom: 15px;
+}
+
+.carousel-price p {
+    margin: 0;
+    font-size: 1.1rem;
+}
+
+.fullPrice {
+    text-decoration: line-through;
+}
+
+.onSale {
+    font-weight: 700;
+    color: var(--red-contrast-color);
+}
+
+.carousel-cta {
+    display: block;
+    box-sizing: border-box;
+    width: 100%;
+    padding: 10px 0;
+    background-color: var(--red-contrast-color);
+    color: var(--light-text-color);
+    text-align: center;
+    text-transform: uppercase;
+    font-size: 1.1rem;
+    border-radius: 20px;
+}
+
+.carousel-arrow {
+    position: absolute;
+    top: 40%;
+    transform: translateY(-50%);
+    z-index: 1;
+    width: 0;
+    height: 0;
+    padding: 0;
+    background: none;
+    border: none;
+    border-top: 12px solid transparent;
+    border-bottom: 12px solid transparent;
+    cursor: pointer;
+}
+
+.prev-btn {
+    left: 8px;
+    border-right: 14px solid var(--dark-text-color);
+}
+
+.next-btn {
+    right: 8px;
+    border-left: 14px solid var(--dark-text-color);
+}
+
+.carousel-dots {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    padding: 10px 0 20px;
+}
+
+.carousel-dot {
+    width: 12px;
+    height: 12px;
+    padding: 0;
+    border: 1px solid var(--dark-text-color);
+    border-radius: 50%;
+    background: transparent;
+    cursor: pointer;
+}
+
+.carousel-dot.active {
+    background: var(--dark-text-color);
+    border-color: var(--dark-text-color-color);
 }
