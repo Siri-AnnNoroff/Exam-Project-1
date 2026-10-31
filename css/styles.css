@@ -9,16 +9,15 @@
     box-sizing:border-box;
 }
 html {
-     font-family: "Schibsted Grotesk";
-     background-color: var(--light-text-color);
-      color: var(--dark-text-color);
-      overflow-x: hidden;
-
+    font-family: "Schibsted Grotesk";
+    background-color: var(--light-text-color);
+    color: var(--dark-text-color);
+    overflow-x: hidden;
 }
 
 main {
-    margin-left: 25rem;
-    margin-right: 25rem;
+    margin-left: 30%;
+    margin-right: 30%;
 }
 header {
     background-color:var(--red-contrast-color);
@@ -206,8 +205,8 @@ a {
 
 .product.grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-    gap: 3rem;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 5px;
     width: 100%;
     max-width: 100%;
 }
@@ -225,4 +224,36 @@ a {
     width: 100%;
     object-fit: contain;
     display: block;
+}
+
+/*forms*/
+
+.login {
+    margin-left: 33%;
+    margin-right: 33%;
+    margin-bottom: 40px;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+label,
+.register-text {
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  margin-bottom: 16px;
+}
+
+input {
+  box-sizing: border-box;
+  width: 100%;
+  height: 45px;
+  padding: 0 10px;
+  margin-bottom: 34px;
+  background: #fff;
+  border: 1px solid #e6e0d6;
+  border-radius: 6px;
+  font-size: 0.75rem;
 }
