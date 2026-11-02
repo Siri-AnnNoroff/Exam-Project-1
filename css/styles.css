@@ -257,3 +257,42 @@ input {
   border-radius: 6px;
   font-size: 0.75rem;
 }
+
+/*single product*/
+
+.share-btn {
+ 
+  
+ 
+  background: none;
+  border: none;
+justify-self: left;
+}
+
+.share-btn i {
+    color: var(--dark-text-color);
+}
+
+.product-details {
+    margin-top: 50px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 2rem;
+ 
+}
+
+.product-image {
+  grid-row: 1 / span 5;
+  width: 50%;
+  height: auto;
+   justify-self: center;
+}
+
+.product-details .carousel-cta {
+  grid-column: 2;
+  grid-row: 6;
+  display: block;
+  margin-top: 1.5rem;
+  text-align: center;
+  width: auto;
+}

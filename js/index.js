@@ -124,8 +124,6 @@ function buildCarousel(carousel, products) {
   showSlide(0);
 }
 
-fetchCarousel();
-
 function buildGrid(grid, product) {
   const productBox = document.createElement("div");
   productBox.classList.add("product-box");
