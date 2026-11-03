@@ -1,7 +1,6 @@
 "use strict";
 
 const API = "https://v2.api.noroff.dev/online-shop";
-
 const currencySymbol = "$";
 
 async function fetchProduct() {
@@ -17,7 +16,7 @@ async function fetchProduct() {
     const response = await fetch(`${API}/${id}`);
     if (!response.ok) throw new Error(`HTTP error ${response.status}`);
     const { data } = await response.json();
-    buildSinglePeroduct(data);
+    buildSingleProduct(data);
   } catch (error) {
     const message = "Failed to load product";
     singleProduct.textContent = message;
@@ -58,17 +57,27 @@ function shareButton(product) {
   return shareBtn;
 }
 
-function buildSinglePeroduct(product) {
+function buildSingleProduct(product) {
   const singleProduct = document.getElementById("single-product");
+  singleProduct.textContent = "";
+
   const productDetails = document.createElement("div");
   productDetails.classList.add("product-details");
+
+  // ---- Top row: image on the left, info on the right ----
+  const top = document.createElement("div");
+  top.classList.add("product-top");
 
   const productImage = document.createElement("img");
   productImage.classList.add("product-image");
   productImage.src = product.image.url;
-  productImage.alt = product.image.alt;
+  productImage.alt = product.image.alt || product.title;
 
-  const name = document.createElement("h3");
+  const info = document.createElement("div");
+  info.classList.add("product-info");
+
+  const name = document.createElement("h2");
+  name.classList.add("product-title");
   name.textContent = product.title;
 
   const priceArea = document.createElement("div");
@@ -88,27 +97,86 @@ function buildSinglePeroduct(product) {
   }
 
   const description = document.createElement("p");
+  description.classList.add("product-description");
   description.textContent = product.description;
 
   const tags = document.createElement("p");
-  tags.textContent = "Tags: " + product.tags;
+  tags.classList.add("product-tags");
+  tags.textContent = "Tags: " + product.tags.join(" / ");
 
   const cta = document.createElement("a");
   cta.classList.add("carousel-cta");
   cta.textContent = "Log in to add to cart";
-  cta.addEventListener("click", function () {
-    window.location.href = "../account/login.html";
-  });
+  cta.href = "../account/login.html";
 
-  productDetails.append(
-    productImage,
-    name,
-    priceArea,
-    description,
-    tags,
-    shareButton(product),
-    cta,
-  );
+  info.append(name, priceArea, description, tags, shareButton(product), cta);
+  top.append(productImage, info);
+
+  // ---- Rating ----
+  const rated = document.createElement("div");
+  rated.classList.add("product-rating");
+
+  const ratedLabel = document.createElement("span");
+  ratedLabel.classList.add("rated-label");
+  ratedLabel.textContent = "RATED";
+
+  const ratedStars = document.createElement("span");
+  ratedStars.classList.add("stars");
+  const ratedFilled = Math.max(0, Math.min(5, Math.round(product.rating || 0)));
+  ratedStars.textContent =
+    "★".repeat(ratedFilled) + "☆".repeat(5 - ratedFilled);
+  ratedStars.setAttribute("aria-label", `${ratedFilled} out of 5 stars`);
+
+  const ratedNumber = document.createElement("span");
+  ratedNumber.classList.add("rated-number");
+  ratedNumber.textContent = `(${product.rating})`;
+
+  rated.append(ratedLabel, " ", ratedNumber, " ", ratedStars);
+
+  const reviewsSection = document.createElement("section");
+  reviewsSection.classList.add("reviews");
+
+  const reviewsHeading = document.createElement("h2");
+  reviewsHeading.classList.add("reviews-heading");
+  reviewsHeading.textContent = "REVIEWS";
+  reviewsSection.appendChild(reviewsHeading);
+
+  if (!product.reviews || product.reviews.length === 0) {
+    const noReviews = document.createElement("p");
+    noReviews.classList.add("no-reviews");
+    noReviews.textContent = "No reviews yet";
+    reviewsSection.appendChild(noReviews);
+  } else {
+    const reviewCards = product.reviews.map((review) => {
+      const reviewCard = document.createElement("div");
+      reviewCard.classList.add("review");
+
+      const reviewStars = document.createElement("span");
+      reviewStars.classList.add("stars");
+      const reviewFilled = Math.max(
+        0,
+        Math.min(5, Math.round(review.rating || 0)),
+      );
+      reviewStars.textContent =
+        "★".repeat(reviewFilled) + "☆".repeat(5 - reviewFilled);
+      reviewStars.setAttribute("aria-label", `${reviewFilled} out of 5 stars`);
+
+      const reviewText = document.createElement("p");
+      reviewText.classList.add("review-text");
+      reviewText.textContent = review.description;
+
+      const reviewAuthor = document.createElement("p");
+      reviewAuthor.classList.add("review-author");
+      reviewAuthor.textContent = `-${review.username}`;
+
+      reviewCard.append(reviewStars, reviewText, reviewAuthor);
+      return reviewCard;
+    });
+
+    reviewsSection.append(...reviewCards);
+  }
+
+  productDetails.append(top, rated, reviewsSection);
   singleProduct.append(productDetails);
 }
 
