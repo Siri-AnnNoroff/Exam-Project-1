@@ -129,7 +129,7 @@ function buildGrid(grid, product) {
   productBox.classList.add("product-box");
 
   const productImage = document.createElement("img");
-  productImage.classList.add("product-image");
+  productImage.classList.add("grid-image");
   productImage.src = product.image.url;
   productImage.alt = product.image.alt;
 
