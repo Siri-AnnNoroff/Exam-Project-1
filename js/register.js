@@ -1,6 +1,6 @@
 "use strict";
 
-const API_BASE = "https://v2.api.noroff.dev";
+const API = "https://v2.api.noroff.dev";
 
 const form = document.querySelector("#registration-form");
 const message = document.querySelector("#form-message");
@@ -15,9 +15,7 @@ function validate({ name, email, password, confirmPassword }) {
   const errors = [];
 
   if (!/^[\w]+$/.test(name)) {
-    errors.push(
-      "Name can only contain letters, numbers and underscores (no spaces).",
-    );
+    errors.push("Name can only contain letters, numbers and underscores.");
   }
 
   if (!/^[\w\-.]+@stud\.noroff\.no$/i.test(email)) {
@@ -36,7 +34,7 @@ function validate({ name, email, password, confirmPassword }) {
 }
 
 async function registerUser({ name, email, password }) {
-  const response = await fetch(`${API_BASE}/auth/register`, {
+  const response = await fetch(`${API}/auth/register`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ name, email, password }),
@@ -45,10 +43,8 @@ async function registerUser({ name, email, password }) {
   const json = await response.json();
 
   if (!response.ok) {
-    const apiMessage =
-      json.errors?.map((err) => err.message).join(" ") ||
-      json.message ||
-      "Registration failed. Please try again.";
+    console.log(json);
+    const apiMessage = "Registration failed. Please try again.";
     throw new Error(apiMessage);
   }
 
@@ -72,7 +68,6 @@ form.addEventListener("submit", async (event) => {
     showMessage(errors.join(" "));
     return;
   }
-
   submitBtn.disabled = true;
   submitBtn.textContent = "Registering...";
 
