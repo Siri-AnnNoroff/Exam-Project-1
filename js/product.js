@@ -1,7 +1,10 @@
 "use strict";
 
+import { addToCart } from "./cart-logic.js";
+
 const API = "https://v2.api.noroff.dev/online-shop";
 const currencySymbol = "$";
+const isLoggedIn = Boolean(localStorage.getItem("accessToken"));
 
 async function fetchProduct() {
   const singleProduct = document.getElementById("single-product");
@@ -103,10 +106,18 @@ function buildSingleProduct(product) {
   tags.classList.add("product-tags");
   tags.textContent = "Tags: " + product.tags.join(" / ");
 
-  const cta = document.createElement("a");
-  cta.classList.add("carousel-cta");
-  cta.textContent = "Log in to add to cart";
-  cta.href = "../account/login.html";
+  let cta;
+  if (isLoggedIn) {
+    cta = document.createElement("button");
+    cta.classList.add("carousel-cta");
+    cta.textContent = "Add to cart";
+    cta.addEventListener("click", () => addToCart(product));
+  } else {
+    cta = document.createElement("a");
+    cta.classList.add("carousel-cta");
+    cta.textContent = "Log in to add to cart";
+    cta.href = "../account/login.html";
+  }
 
   info.append(name, priceArea, description, tags, shareButton(product), cta);
   top.append(productImage, info);

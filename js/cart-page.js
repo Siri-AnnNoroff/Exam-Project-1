@@ -1,60 +1,24 @@
 "use strict";
 
+import { getCart, setCart, addToCart } from "./cart-logic.js";
+
 const API = "https://v2.api.noroff.dev";
 const currencySymbol = "$";
 const cartSection = document.getElementById("cart-section");
-const cartBadge = document.querySelector(".cart-badge");
-let cart = [];
-
-//*add to cart*//
-
-function addToCart(product) {
-  const alreadyInCart = cart.find((item) => item.id === product.id);
-  if (alreadyInCart) {
-    alreadyInCart.quantity += 1;
-  } else {
-    cart.push({ ...product, quantity: 1 });
-  }
-  saveCart();
-  updateCartBadge();
-}
-
-function saveCart() {
-  localStorage.setItem("cart", JSON.stringify(cart));
-}
-
-function loadCart() {
-  const savedCart = localStorage.getItem("cart");
-  if (savedCart) {
-    cart = JSON.parse(savedCart);
-  }
-  updateCartBadge();
-}
-
-loadCart();
-
-function updateCartBadge() {
-  const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
-  cartBadge.textContent = totalItems;
-}
-
 const clearCartBtn = document.querySelector(".clear-cart");
+
 clearCartBtn.addEventListener("click", () => {
-  cartBadge.textContent = 0;
-  cart = [];
-  saveCart();
+  setCart([]);
   displayCart();
   showToast("Cart cleared", "success");
 });
 
 function removeFromCart(product) {
-  const productInCart = cart.find((item) => item.id === product.id);
+  const productInCart = getCart().find((item) => item.id === product.id);
   if (productInCart) {
     productInCart.quantity -= 1;
-    cart = cart.filter((item) => item.quantity > 0);
+    setCart(getCart().filter((item) => item.quantity > 0));
   }
-  saveCart();
-  updateCartBadge();
   displayCart();
 }
 
@@ -91,7 +55,7 @@ function listTop() {
 }
 
 function emptyCart() {
-  return cart.length === 0;
+  return getCart().length === 0;
 }
 
 function productsInCart() {
@@ -103,7 +67,7 @@ function productsInCart() {
     return;
   }
 
-  cart.forEach((product) => {
+  getCart().forEach((product) => {
     const card = document.createElement("div");
     cartSection.appendChild(card);
 
@@ -171,7 +135,7 @@ const totalSection = document.getElementById("total-section");
 
 function calculateTotal() {
   let totalCost = 0;
-  cart.forEach((product) => {
+  getCart().forEach((product) => {
     let itemPrice = product.price;
     if (product.onSale === true) {
       itemPrice = product.discountedPrice;
@@ -210,9 +174,7 @@ function displayTotal() {
 displayCart();
 
 function deleteProduct(product) {
-  cart = cart.filter((item) => item.id !== product.id);
-  saveCart();
-  updateCartBadge();
+  setCart(getCart().filter((item) => item.id !== product.id));
   displayCart();
 }
 

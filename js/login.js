@@ -88,7 +88,10 @@ loginForm.addEventListener("submit", async (event) => {
     const apiKey = await buildApiKey(accessToken);
 
     storeSession({ accessToken, apiKey, user });
-    showMessage("Logged in! Redirecting to product...", "success");
+    showMessage("Logged in! Redirecting to products...", "success");
+    setTimeout(() => {
+      window.location.href = "../index.html";
+    }, 1000);
   } catch (error) {
     showMessage("Unable to log in");
   }
