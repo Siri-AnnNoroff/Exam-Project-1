@@ -1,6 +1,7 @@
 "use strict";
 
 import { getProducts } from "./api.js";
+import { addToCart } from "./cart-logic.js";
 
 const currencySymbol = "$";
 

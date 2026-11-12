@@ -5,7 +5,9 @@ import { getCart, setCart, addToCart } from "./cart-logic.js";
 const API = "https://v2.api.noroff.dev";
 const currencySymbol = "$";
 const cartSection = document.getElementById("cart-section");
+
 const clearCartBtn = document.querySelector(".clear-cart");
+clearCartBtn.classList.add("carousel-cta");
 
 clearCartBtn.addEventListener("click", () => {
   setCart([]);
@@ -14,11 +16,10 @@ clearCartBtn.addEventListener("click", () => {
 });
 
 function removeFromCart(product) {
-  const productInCart = getCart().find((item) => item.id === product.id);
-  if (productInCart) {
-    productInCart.quantity -= 1;
-    setCart(getCart().filter((item) => item.quantity > 0));
-  }
+  const cart = getCart();
+  const item = cart.find((i) => i.id === product.id);
+  if (item) item.quantity -= 1;
+  setCart(cart.filter((i) => i.quantity > 0));
   displayCart();
 }
 
@@ -49,9 +50,10 @@ function listTop() {
 
   const totalTop = document.createElement("span");
   totalTop.textContent = "Total";
-
-  cartSection.append(productTop, quantityTop, totalTop);
-  return cartSection;
+  const header = document.createElement("div");
+  header.classList.add("cart-header");
+  header.append(productTop, quantityTop, totalTop);
+  cartSection.appendChild(header);
 }
 
 function emptyCart() {
@@ -69,35 +71,18 @@ function productsInCart() {
 
   getCart().forEach((product) => {
     const card = document.createElement("div");
-    cartSection.appendChild(card);
+    card.classList.add("cart-row");
 
     const link = document.createElement("a");
     link.href = `../product/index.html?id=${product.id}`;
-    card.appendChild(link);
 
     const image = document.createElement("img");
     image.src = product.image.url;
     image.alt = product.image.alt;
-    link.appendChild(image);
 
     const title = document.createElement("h3");
     title.textContent = product.title;
-    link.appendChild(title);
-
-    const originalPrice = document.createElement("p");
-    if (product.onSale === true) {
-      originalPrice.classList.add("fullPrice");
-      originalPrice.textContent = currencySymbol + product.price;
-      card.appendChild(originalPrice);
-
-      const salePrice = document.createElement("p");
-      salePrice.textContent = currencySymbol + product.discountedPrice;
-      card.appendChild(salePrice);
-      salePrice.classList.add("onSale");
-    } else {
-      originalPrice.textContent = currencySymbol + product.price;
-      card.appendChild(originalPrice);
-    }
+    link.append(image, title);
 
     const quantitySection = document.createElement("div");
     quantitySection.classList.add("quantity-section");
@@ -117,17 +102,24 @@ function productsInCart() {
     });
 
     quantitySection.append(minusBtn, quantityText, plusBtn);
-    card.appendChild(quantitySection);
+    const itemPrice = product.discountedPrice || product.price;
+    const rowTotal = document.createElement("p");
+    rowTotal.textContent =
+      currencySymbol + (itemPrice * product.quantity).toFixed(2);
+    rowTotal.classList.add("row-total");
+    if (product.discountedPrice < product.price)
+      rowTotal.classList.add("onSale");
 
     const removeBtn = document.createElement("button");
     removeBtn.textContent = "x";
     removeBtn.classList.add("remove-product");
-    card.appendChild(removeBtn);
 
     removeBtn.addEventListener("click", () => {
       deleteProduct(product);
       showToast("You have removed: " + product.title + " from your cart!");
     });
+    card.append(link, quantitySection, rowTotal, removeBtn);
+    cartSection.appendChild(card);
   });
 }
 
@@ -136,10 +128,10 @@ const totalSection = document.getElementById("total-section");
 function calculateTotal() {
   let totalCost = 0;
   getCart().forEach((product) => {
-    let itemPrice = product.price;
-    if (product.onSale === true) {
-      itemPrice = product.discountedPrice;
-    }
+    const itemPrice =
+      product.discountedPrice < product.price
+        ? product.discountedPrice
+        : product.price;
     totalCost += itemPrice * product.quantity;
   });
   return totalCost;
@@ -150,7 +142,7 @@ function displayTotal() {
   if (emptyCart()) {
     const homeLink = document.createElement("a");
     homeLink.href = `../index.html`;
-    homeLink.classList.add("home-link");
+    homeLink.classList.add("carousel-cta");
     homeLink.textContent = "Back to products";
     totalSection.appendChild(homeLink);
     return;
@@ -171,7 +163,6 @@ function displayTotal() {
   placeOrderLink.href = `../checkout/index.html`;
   totalSection.appendChild(placeOrderLink);
 }
-displayCart();
 
 function deleteProduct(product) {
   setCart(getCart().filter((item) => item.id !== product.id));
@@ -185,3 +176,4 @@ function displayCart() {
   productsInCart();
   displayTotal();
 }
+displayCart();

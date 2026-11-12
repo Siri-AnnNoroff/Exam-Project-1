@@ -1,5 +1,7 @@
 "use strict";
 
+import { addToCart } from "./cart-logic";
+
 const API = "https://v2.api.noroff.dev";
 
 const form = document.querySelector("#registration-form");
