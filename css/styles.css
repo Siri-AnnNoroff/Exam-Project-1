@@ -401,3 +401,22 @@ justify-self: left;
   padding: 3rem 7rem;
   border-radius: 15px;
 }
+
+.success-page {
+    text-align: center;
+}
+
+
+.fa-star {
+    font-size: 2rem;
+    color: var(--dark-text-color);
+  animation-name: larger;
+  animation-delay: 1s;
+  animation-duration: 2s;
+}
+
+  @keyframes larger {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+
+}
