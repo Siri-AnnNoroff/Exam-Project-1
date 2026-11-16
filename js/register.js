@@ -1,6 +1,6 @@
 "use strict";
 
-import { addToCart } from "./cart-logic";
+import { getCart, setCart, addToCart } from "./cart-logic.js";
 
 const API = "https://v2.api.noroff.dev";
 

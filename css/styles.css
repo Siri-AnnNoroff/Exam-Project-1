@@ -431,7 +431,10 @@ input {
   font-weight: 800;
 }
 
-
+.empty-cart {
+  text-align: center;
+  padding: 3rem 0;
+}
 
 /*checkout*/
 

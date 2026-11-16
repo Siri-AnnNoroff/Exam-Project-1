@@ -45,10 +45,12 @@ function emptyCart() {
 
 function productsInCart() {
   if (emptyCart()) {
+    cartSection.innerHTML = "";
     const message = document.createElement("p");
     message.textContent = "Your cart is empty";
     cartSection.appendChild(message);
-    cartSection.classList.add("empty-cart");
+    message.classList.add("empty-cart");
+    clearCartBtn.hidden = true;
     return;
   }
 
