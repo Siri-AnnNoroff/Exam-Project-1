@@ -110,7 +110,7 @@ function buildSingleProduct(product) {
   let cta;
   if (isLoggedIn) {
     cta = document.createElement("button");
-    cta.classList.add("carousel-cta");
+    cta.classList.add("cta");
     cta.textContent = "Add to cart";
     cta.addEventListener("click", () => {
       addToCart(product);
@@ -118,7 +118,7 @@ function buildSingleProduct(product) {
     });
   } else {
     cta = document.createElement("a");
-    cta.classList.add("carousel-cta");
+    cta.classList.add("cta");
     cta.textContent = "Log in to add to cart";
     cta.href = "../account/login.html";
   }
@@ -126,7 +126,7 @@ function buildSingleProduct(product) {
   const cartBtn = document.createElement("a");
   cartBtn.textContent = "Go to cart";
   cartBtn.href = "../cart/index.html";
-  cartBtn.classList.add("carousel-cta");
+  cartBtn.classList.add("cta");
 
   info.append(
     name,

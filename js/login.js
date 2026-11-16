@@ -19,12 +19,12 @@ if (isLoggedIn) {
   loginMessage.textContent = "You are already logged in";
 
   cta = document.createElement("a");
-  cta.classList.add("carousel-cta");
+  cta.classList.add("cta");
   cta.textContent = "Back to products";
   cta.href = "../index.html";
 
   const logOutBtn = document.createElement("button");
-  logOutBtn.classList.add("carousel-cta");
+  logOutBtn.classList.add("cta");
   logOutBtn.textContent = "Sign out";
   logOutBtn.addEventListener("click", () => {
     localStorage.removeItem("accessToken");

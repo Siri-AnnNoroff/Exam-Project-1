@@ -152,7 +152,7 @@ a {
     color: var(--red-contrast-color);
 }
 
-.carousel-cta {
+.cta {
     display: block;
     box-sizing: border-box;
     width: 100%;
@@ -424,6 +424,16 @@ input {
   grid-column: 2;
   grid-row: 2;
  text-align: right;
+}
+
+#total-section.is-empty {
+  grid-column: 1/ -1;
+}
+
+#total-section.is-empty .cta {
+  max-width: 500px;
+  
+  justify-self: center;
 }
 
 .summary-row {

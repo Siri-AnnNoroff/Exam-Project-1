@@ -8,7 +8,7 @@ const currencySymbol = "$";
 const cartSection = document.getElementById("cart-section");
 
 const clearCartBtn = document.querySelector(".clear-cart");
-clearCartBtn.classList.add("carousel-cta");
+clearCartBtn.classList.add("cta");
 
 clearCartBtn.addEventListener("click", () => {
   setCart([]);
@@ -50,7 +50,7 @@ function productsInCart() {
     message.textContent = "Your cart is empty";
     cartSection.appendChild(message);
     message.classList.add("empty-cart");
-    clearCartBtn.hidden = true;
+    clearCartBtn.remove();
     return;
   }
 
@@ -124,10 +124,11 @@ function calculateTotal() {
 
 function displayTotal() {
   totalSection.innerHTML = "";
+  totalSection.classList.toggle("is-empty", emptyCart());
   if (emptyCart()) {
     const homeLink = document.createElement("a");
     homeLink.href = `../index.html`;
-    homeLink.classList.add("carousel-cta");
+    homeLink.classList.add("cta");
     homeLink.textContent = "Back to products";
     totalSection.appendChild(homeLink);
     return;
@@ -144,7 +145,7 @@ function displayTotal() {
 
   const placeOrderLink = document.createElement("a");
   placeOrderLink.textContent = "Proceed to checkout";
-  placeOrderLink.classList.add("carousel-cta");
+  placeOrderLink.classList.add("cta");
   placeOrderLink.href = `../checkout/index.html`;
   totalSection.appendChild(placeOrderLink);
 }
