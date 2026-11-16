@@ -163,8 +163,8 @@ a {
     text-transform: uppercase;
     font-size: 1.1rem;
     border-radius: 15px;
-    margin-top: 2rem;
-    cursor: pointer;
+    margin: 1rem 0;
+        cursor: pointer;
 }
 .cta-homepage {
   margin-top: auto;
@@ -250,7 +250,7 @@ a {
 
 .login-message {
   text-align: center;
-  margin: 4rem 0;
+  margin: 5rem 0;
 }
 
 form {
@@ -310,7 +310,6 @@ input {
   flex: 1 1 0;
   display: flex;
   flex-direction: column;
-  gap: 1rem;
 }
 
 .product-info p, .review {

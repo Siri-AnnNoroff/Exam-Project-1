@@ -8,7 +8,7 @@ const currencySymbol = "$";
 const cartSection = document.getElementById("cart-section");
 
 const clearCartBtn = document.querySelector(".clear-cart");
-clearCartBtn.classList.add("cta");
+clearCartBtn.classList.add("cta-homepage", "cta");
 
 clearCartBtn.addEventListener("click", () => {
   setCart([]);
