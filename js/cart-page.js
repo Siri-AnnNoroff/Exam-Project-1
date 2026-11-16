@@ -1,6 +1,7 @@
 "use strict";
 
 import { getCart, setCart, addToCart } from "./cart-logic.js";
+import { showToast } from "./toast.js";
 
 const API = "https://v2.api.noroff.dev";
 const currencySymbol = "$";
@@ -21,24 +22,6 @@ function removeFromCart(product) {
   if (item) item.quantity -= 1;
   setCart(cart.filter((i) => i.quantity > 0));
   displayCart();
-}
-
-//Toast
-
-/**
-@param {string} message
-@param {string} type
- */
-
-function showToast(message, type = "success") {
-  const toastContainer = document.querySelector(".toast-container");
-  const toastElement = document.createElement("div");
-  toastElement.classList.add("toast", type);
-  toastElement.textContent = message;
-  toastContainer.appendChild(toastElement);
-  setTimeout(() => {
-    toastElement.remove();
-  }, 5000);
 }
 
 function listTop() {
@@ -116,7 +99,7 @@ function productsInCart() {
 
     removeBtn.addEventListener("click", () => {
       deleteProduct(product);
-      showToast("You have removed: " + product.title + " from your cart!");
+      showToast("You have removed " + product.title + " from your cart!");
     });
     card.append(link, quantitySection, rowTotal, removeBtn);
     cartSection.appendChild(card);

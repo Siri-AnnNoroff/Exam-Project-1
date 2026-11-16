@@ -1,6 +1,7 @@
 "use strict";
 
 import { addToCart } from "./cart-logic.js";
+import { showToast } from "./toast.js";
 
 const API = "https://v2.api.noroff.dev/online-shop";
 const currencySymbol = "$";
@@ -111,7 +112,10 @@ function buildSingleProduct(product) {
     cta = document.createElement("button");
     cta.classList.add("carousel-cta");
     cta.textContent = "Add to cart";
-    cta.addEventListener("click", () => addToCart(product));
+    cta.addEventListener("click", () => {
+      addToCart(product);
+      showToast(`${product.title} added to your cart`);
+    });
   } else {
     cta = document.createElement("a");
     cta.classList.add("carousel-cta");

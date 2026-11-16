@@ -50,14 +50,20 @@
             <input type="text" id="country" name="couuntry" placeholder="Australia">
       <h3>Payment options</h3>
       <div class="payment-options">
-        <input type="radio" id="pay1" name="payment">
+        <div class="payment-option">
+        <input type="radio" id="pay1" class="radio-btn" name="payment">
           <label for="pay1">Paypal</label>
+        </div>
+          <div class="payment-option">
         <input type="radio" id="pay2" name="payment">
           <label for="pay2">Gpay</label>
+      </div>
+          <div class="payment-option">
         <input type="radio" id="pay3" name="payment">
           <label for="pay3">Apple pay</label>
           </div>
-            <button type="submit" value="Submit" class="carousel-cta">Complete purchase</button>
+        </div>
+            <a href="../success/index.html" class="carousel-cta">Complete purchase</a>
       </form>
     </main>
     <footer>
