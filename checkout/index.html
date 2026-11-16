@@ -46,32 +46,36 @@
       <h3>Shipping information</h3>
       <form class="checkout-form">
           <label for="fname"></i>Name</label>
-            <input type="text" id="fname" name="firstname" placeholder="P. Sherman">
+            <input type="text" id="fname" name="firstname" placeholder="P. Sherman" required>
           <label for="adr"> Address</label>
-            <input type="text" id="adr" name="address" placeholder="42 Wallaby Way">
+            <input type="text" id="adr" name="address" placeholder="42 Wallaby Way" required>
           <label for="zip">Zip code</label>
-            <input type="text" id="zip" name="zip" placeholder="2003">
+            <input type="text" id="zip" name="zip" placeholder="2003" required>
           <label for="city">City</label>
-            <input type="text" id="city" name="city" placeholder="Sydney">
+            <input type="text" id="city" name="city" placeholder="Sydney" required>
           <label for="country">Country</label>
-            <input type="text" id="country" name="couuntry" placeholder="Australia">
+            <input type="text" id="country" name="couuntry" placeholder="Australia" required>
       <h3>Payment options</h3>
       <div class="payment-options">
         <div class="payment-option">
-        <input type="radio" id="pay1" class="radio-btn" name="payment">
+        <input type="radio" id="pay1" class="radio-btn" name="payment" required>
           <label for="pay1">Paypal</label>
         </div>
           <div class="payment-option">
-        <input type="radio" id="pay2" name="payment">
+        <input type="radio" id="pay2" name="payment" required>
           <label for="pay2">Gpay</label>
       </div>
           <div class="payment-option">
-        <input type="radio" id="pay3" name="payment">
+        <input type="radio" id="pay3" name="payment" required>
           <label for="pay3">Apple pay</label>
           </div>
         </div>
-            <a href="../success/index.html" class="cta" id="complete-purchase">Complete purchase</a>
+            <button type="submit" class="cta" id="complete-purchase">Complete purchase</button>
       </form>
+      <section>
+          <p class="register-text">Forgot something?</p>
+          <a href="../cart/index.html" class="cta">Back to cart</a>
+        </section>
     </main>
     <footer>
       <a href="../pages/ordering.html">Ordering</a>

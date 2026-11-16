@@ -87,6 +87,12 @@ function displayTotal() {
   totalSection.appendChild(totalSum);
 }
 
+const form = document.querySelector(".checkout-form");
+form.addEventListener("submit", (e) => {
+  e.preventDefault();
+  window.location.href = "../success/index.html";
+});
+
 function displayCart() {
   listTop();
   productsInCart();
