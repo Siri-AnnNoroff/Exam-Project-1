@@ -4,10 +4,37 @@ import { addToCart } from "./cart-logic.js";
 
 const API = "https://v2.api.noroff.dev";
 
+const loginPage = document.getElementById("login");
 const loginForm = document.getElementById("login-form");
 const message = document.querySelector("#form-message");
 const submitBtn = document.getElementById("login-btn");
-console.log(submitBtn);
+const isLoggedIn = Boolean(localStorage.getItem("accessToken"));
+
+let cta;
+
+if (isLoggedIn) {
+  loginPage.innerHTML = "";
+  const loginMessage = document.createElement("p");
+  loginMessage.classList.add("login-message");
+  loginMessage.textContent = "You are already logged in";
+
+  cta = document.createElement("a");
+  cta.classList.add("carousel-cta");
+  cta.textContent = "Back to products";
+  cta.href = "../index.html";
+
+  const logOutBtn = document.createElement("button");
+  logOutBtn.classList.add("carousel-cta");
+  logOutBtn.textContent = "Sign out";
+  logOutBtn.addEventListener("click", () => {
+    localStorage.removeItem("accessToken");
+    localStorage.removeItem("apiKey");
+    localStorage.removeItem("user");
+    window.location.reload();
+  });
+
+  loginPage.append(loginMessage, cta, logOutBtn);
+}
 
 function showMessage(text, type = "error") {
   message.textContent = text;

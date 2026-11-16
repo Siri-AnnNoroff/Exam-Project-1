@@ -245,6 +245,11 @@ a {
     margin-bottom: 40px;
 }
 
+.login-message {
+  text-align: center;
+  margin: 4rem 0;
+}
+
 form {
     display: flex;
     flex-direction: column;
