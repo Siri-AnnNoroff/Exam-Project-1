@@ -1,5 +1,7 @@
 "use strict";
 
+import { addToCart } from "./cart-logic.js";
+
 const API = "https://v2.api.noroff.dev";
 
 const loginForm = document.getElementById("login-form");

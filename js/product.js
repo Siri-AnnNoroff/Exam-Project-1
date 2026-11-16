@@ -123,7 +123,20 @@ function buildSingleProduct(product) {
     cta.href = "../account/login.html";
   }
 
-  info.append(name, priceArea, description, tags, shareButton(product), cta);
+  const cartBtn = document.createElement("a");
+  cartBtn.textContent = "Go to cart";
+  cartBtn.href = "../cart/index.html";
+  cartBtn.classList.add("carousel-cta");
+
+  info.append(
+    name,
+    priceArea,
+    description,
+    tags,
+    shareButton(product),
+    cta,
+    cartBtn,
+  );
   top.append(productImage, info);
 
   const rated = document.createElement("div");

@@ -427,6 +427,10 @@ input {
   text-transform: uppercase;
 }
 
+.total-sum {
+  font-weight: 800;
+}
+
 /*checkout*/
 
 .payment-option {
