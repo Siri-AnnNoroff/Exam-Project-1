@@ -63,7 +63,7 @@ function createSlide(product) {
   }
 
   const cta = document.createElement("a");
-  cta.classList.add("cta");
+  cta.classList.add("cta-homepage", "cta");
   cta.textContent = "View product";
   cta.href = `product/index.html?id=${product.id}`;
 
@@ -154,7 +154,7 @@ function buildGrid(grid, product) {
   }
 
   const cta = document.createElement("a");
-  cta.classList.add("cta");
+  cta.classList.add("cta-homepage", "cta");
   cta.textContent = "View product";
   cta.href = `product/index.html?id=${product.id}`;
 
