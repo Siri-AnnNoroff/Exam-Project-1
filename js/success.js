@@ -14,6 +14,7 @@ function getEmail() {
 function buildSuccessPage() {
   const h2 = document.createElement("h2");
   h2.textContent = "Success!";
+  h2.classList.add("success-header");
 
   const successIcon = document.createElement("i");
   successIcon.classList.add("fa-regular", "fa-star");
@@ -21,7 +22,7 @@ function buildSuccessPage() {
   const confirmationText = document.createElement("p");
 
   const orderNumber = document.createElement("strong");
-  orderNumber.textContent = "12345";
+  orderNumber.textContent = "314159";
 
   const email = document.createElement("strong");
   email.textContent = getEmail();

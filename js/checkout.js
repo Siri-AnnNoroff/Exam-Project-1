@@ -5,6 +5,11 @@ import { getCart, setCart, addToCart } from "./cart-logic.js";
 const API = "https://v2.api.noroff.dev";
 const currencySymbol = "$";
 const cartSection = document.getElementById("cart-section");
+const completePurchaseBtn = document.getElementById("complete-purchase");
+
+completePurchaseBtn.addEventListener("click", () => {
+  setCart([]);
+});
 
 function listTop() {
   const productTop = document.createElement("span");
