@@ -2,6 +2,7 @@
 
 import { getProducts } from "./api.js";
 import { addToCart } from "./cart-logic.js";
+import { categories } from "./nav.js";
 
 const currencySymbol = "$";
 
@@ -19,8 +20,18 @@ async function firstFetch() {
     console.error(message, error);
     return;
   }
+
+  const activeCategory = new URLSearchParams(window.location.search).get(
+    "category",
+  );
+  const categoryTags = categories[activeCategory];
+  const visibleProducts = categoryTags
+    ? products.filter((product) =>
+        product.tags.some((tag) => categoryTags.includes(tag.toLowerCase())),
+      )
+    : products;
   buildCarousel(carousel, products.slice(0, 3));
-  products.forEach((product) => buildGrid(grid, product));
+  visibleProducts.forEach((product) => buildGrid(grid, product));
 }
 
 async function fetchCarousel() {

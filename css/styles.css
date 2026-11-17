@@ -29,6 +29,25 @@ header {
     padding: 2rem;
 }
 
+.nav-bar {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2rem;
+  padding: 1rem;
+}
+
+.nav-bar a {
+  text-transform: uppercase;
+  font-size: 1.2rem;
+  font-weight: 500;
+  color: var(--dark-text-color);
+}
+
+.nav-bar a.active  {
+  text-decoration: underline;
+}
+
 h1 {
     font-size: 3rem;
     color: var(--light-text-color);

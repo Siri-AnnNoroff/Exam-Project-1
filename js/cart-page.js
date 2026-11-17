@@ -2,6 +2,7 @@
 
 import { getCart, setCart, addToCart } from "./cart-logic.js";
 import { showToast } from "./toast.js";
+import { categories } from "./nav.js";
 
 const API = "https://v2.api.noroff.dev";
 const currencySymbol = "$";
