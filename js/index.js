@@ -1,38 +1,39 @@
 "use strict";
 
-import { getProducts } from "./api.js";
+import { getProducts, buildPagination } from "./api.js";
 import { addToCart } from "./cart-logic.js";
 import { categories } from "./nav.js";
 
+let currentPage = 1;
+const limit = 6;
+
 const currencySymbol = "$";
 
-async function firstFetch() {
-  const carousel = document.getElementById("carousel");
-  const grid = document.querySelector(".product.grid");
+const grid = document.querySelector(".product.grid");
+const prevPageBtn = document.querySelector(".prev-page");
+const nextPageBtn = document.querySelector(".next-page");
+const pageNumber = document.querySelector(".page-number");
 
-  let products;
+async function showGrid(page) {
   try {
-    products = await getProducts();
+    const result = await buildPagination(page, limit);
+    grid.replaceChildren();
+    result.data.forEach((product) => buildGrid(grid, product));
+    currentPage = page;
+    pageNumber.textContent = `page ${result.meta.currentPage} of ${result.meta.pageCount}`;
+    prevPageBtn.disabled = result.meta.isFirstPage;
+    nextPageBtn.disabled = result.meta.isLastPage;
   } catch (error) {
-    const message = "Failed to load products";
-    carousel.textContent = message;
-    grid.textContent = message;
-    console.error(message, error);
-    return;
+    grid.textContent = "Could not load products";
+    console.error("Could not load products", error);
   }
-
-  const activeCategory = new URLSearchParams(window.location.search).get(
-    "category",
-  );
-  const categoryTags = categories[activeCategory];
-  const visibleProducts = categoryTags
-    ? products.filter((product) =>
-        product.tags.some((tag) => categoryTags.includes(tag.toLowerCase())),
-      )
-    : products;
-  buildCarousel(carousel, products.slice(0, 3));
-  visibleProducts.forEach((product) => buildGrid(grid, product));
 }
+
+prevPageBtn.addEventListener("click", () => showGrid(currentPage - 1));
+nextPageBtn.addEventListener("click", () => showGrid(currentPage + 1));
+
+fetchCarousel();
+showGrid(currentPage);
 
 async function fetchCarousel() {
   const carousel = document.getElementById("carousel");
@@ -172,5 +173,3 @@ function buildGrid(grid, product) {
   productBox.append(productImage, name, priceArea, cta);
   grid.append(productBox);
 }
-
-firstFetch();

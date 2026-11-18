@@ -259,6 +259,21 @@ a {
     object-fit: cover;
 }
 
+.pagination {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  font-size: 1.8rem;
+  margin: 3rem 0;
+}
+
+.next-page, .prev-page {
+  background-color: var(--red-contrast-color);
+  color: var(--light-text-color);
+  padding: 1rem;
+  border-radius: 5px;
+}
+
 /*forms*/
 
 .login {
