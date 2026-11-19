@@ -1,11 +1,16 @@
 "use strict";
 
-import { getProducts, buildPagination } from "./api.js";
+import { getProducts } from "./api.js";
 import { addToCart } from "./cart-logic.js";
 import { categories } from "./nav.js";
 
 let currentPage = 1;
 const limit = 6;
+let allProducts = [];
+const activeCategory = new URLSearchParams(window.location.search).get(
+  "category",
+);
+const categoryTag = categories[activeCategory];
 
 const currencySymbol = "$";
 
@@ -14,26 +19,48 @@ const prevPageBtn = document.querySelector(".prev-page");
 const nextPageBtn = document.querySelector(".next-page");
 const pageNumber = document.querySelector(".page-number");
 
-async function showGrid(page) {
+async function loadProducts() {
   try {
-    const result = await buildPagination(page, limit);
-    grid.replaceChildren();
-    result.data.forEach((product) => buildGrid(grid, product));
-    currentPage = page;
-    pageNumber.textContent = `page ${result.meta.currentPage} of ${result.meta.pageCount}`;
-    prevPageBtn.disabled = result.meta.isFirstPage;
-    nextPageBtn.disabled = result.meta.isLastPage;
+    const products = await getProducts();
+    if (categoryTag) {
+      grid.replaceChildren();
+      products
+        .filter((product) =>
+          product.tags.some((tag) => categoryTag.includes(tag.toLowerCase())),
+        )
+        .forEach((product) => buildGrid(grid, product));
+      prevPageBtn.hidden = true;
+      nextPageBtn.hidden = true;
+      pageNumber.hidden = true;
+    } else {
+      allProducts = products;
+      showGrid(1);
+    }
   } catch (error) {
     grid.textContent = "Could not load products";
     console.error("Could not load products", error);
   }
 }
 
+function showGrid(page) {
+  const pageCounter = Math.ceil(allProducts.length / limit);
+  const start = (page - 1) * limit;
+  currentPage = page;
+  grid.replaceChildren();
+  allProducts
+    .slice(start, start + limit)
+    .forEach((product) => buildGrid(grid, product));
+
+  pageNumber.textContent = `page ${page} of ${pageCounter}`;
+  prevPageBtn.disabled = page <= 1;
+  nextPageBtn.disabled = page >= pageCounter;
+}
+
 prevPageBtn.addEventListener("click", () => showGrid(currentPage - 1));
 nextPageBtn.addEventListener("click", () => showGrid(currentPage + 1));
 
 fetchCarousel();
-showGrid(currentPage);
+loadProducts();
 
 async function fetchCarousel() {
   const carousel = document.getElementById("carousel");

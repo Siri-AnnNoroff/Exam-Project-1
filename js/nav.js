@@ -4,7 +4,7 @@ const filterPage = "../index.html";
 const API = "https://v2.api.noroff.dev/online-shop";
 
 export const categories = {
-  Electronics: [
+  electronics: [
     "audio",
     "computers",
     "electronics",
@@ -43,8 +43,11 @@ async function buildNav() {
     const link = document.createElement("a");
     link.href = `${filterPage}?category=${encodeURIComponent(category)}`;
     link.textContent = category;
+    console.log(activeCategory);
+    console.log("This is: " + category);
     if (category === activeCategory) link.classList.add("active");
     nav.appendChild(link);
+    console.log(activeCategory);
   });
 }
 
