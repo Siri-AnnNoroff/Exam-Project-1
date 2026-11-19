@@ -5,7 +5,7 @@ import { addToCart } from "./cart-logic.js";
 import { categories } from "./nav.js";
 
 let currentPage = 1;
-const limit = 6;
+const limit = 8;
 let allProducts = [];
 const activeCategory = new URLSearchParams(window.location.search).get(
   "category",
@@ -14,7 +14,7 @@ const categoryTag = categories[activeCategory];
 
 const currencySymbol = "$";
 
-const grid = document.querySelector(".product.grid");
+const grid = document.querySelector(".product-grid");
 const prevPageBtn = document.querySelector(".prev-page");
 const nextPageBtn = document.querySelector(".next-page");
 const pageNumber = document.querySelector(".page-number");
@@ -82,6 +82,10 @@ function createSlide(product) {
   image.src = product.image.url;
   image.alt = product.image.alt;
 
+  const imageLink = document.createElement("a");
+  imageLink.href = `product/index.html?id=${product.id}`;
+  imageLink.appendChild(image);
+
   const name = document.createElement("h3");
   name.textContent = product.title;
 
@@ -106,7 +110,7 @@ function createSlide(product) {
   cta.textContent = "View product";
   cta.href = `product/index.html?id=${product.id}`;
 
-  slide.append(image, name, priceArea, cta);
+  slide.append(imageLink, name, priceArea, cta);
   return slide;
 }
 
@@ -173,6 +177,10 @@ function buildGrid(grid, product) {
   productImage.src = product.image.url;
   productImage.alt = product.image.alt;
 
+  const imageLink = document.createElement("a");
+  imageLink.href = `product/index.html?id=${product.id}`;
+  imageLink.appendChild(productImage);
+
   const name = document.createElement("h3");
   name.textContent = product.title;
 
@@ -197,6 +205,6 @@ function buildGrid(grid, product) {
   cta.textContent = "View product";
   cta.href = `product/index.html?id=${product.id}`;
 
-  productBox.append(productImage, name, priceArea, cta);
+  productBox.append(imageLink, name, priceArea, cta);
   grid.append(productBox);
 }
