@@ -15,9 +15,17 @@ const categoryTag = categories[activeCategory];
 const currencySymbol = "$";
 
 const grid = document.querySelector(".product-grid");
+const pagination = document.querySelector(".pagination");
 const prevPageBtn = document.querySelector(".prev-page");
 const nextPageBtn = document.querySelector(".next-page");
 const pageNumber = document.querySelector(".page-number");
+
+function getPaginationNumbers(current, total) {
+  if (total <= 3) return Array.from({ length: total }, (_, i) => i + 1);
+  if (current <= 2) return [1, 2, "…", total];
+  if (current >= total - 1) return [1, "…", total - 1, total];
+  return [1, "…", current, "…", total];
+}
 
 async function loadProducts() {
   try {
@@ -29,9 +37,7 @@ async function loadProducts() {
           product.tags.some((tag) => categoryTag.includes(tag.toLowerCase())),
         )
         .forEach((product) => buildGrid(grid, product));
-      prevPageBtn.hidden = true;
-      nextPageBtn.hidden = true;
-      pageNumber.hidden = true;
+      pagination.hidden = true;
     } else {
       allProducts = products;
       showGrid(1);
@@ -51,7 +57,26 @@ function showGrid(page) {
     .slice(start, start + limit)
     .forEach((product) => buildGrid(grid, product));
 
-  pageNumber.textContent = `page ${page} of ${pageCounter}`;
+  pageNumber.replaceChildren();
+  getPaginationNumbers(page, pageCounter).forEach((item) => {
+    if (item === "…") {
+      const dots = document.createElement("span");
+      dots.classList.add("page-ellipsis");
+      dots.textContent = item;
+      pageNumber.appendChild(dots);
+      return;
+    }
+    const btn = document.createElement("button");
+    btn.classList.add("page-btn");
+    btn.textContent = item;
+    if (item === page) {
+      btn.classList.add("active");
+      btn.setAttribute("aria-current", "page");
+    }
+    btn.addEventListener("click", () => showGrid(item));
+    pageNumber.appendChild(btn);
+  });
+
   prevPageBtn.disabled = page <= 1;
   nextPageBtn.disabled = page >= pageCounter;
 }
@@ -89,6 +114,10 @@ function createSlide(product) {
   const name = document.createElement("h3");
   name.textContent = product.title;
 
+  const productDetails = document.createElement("p");
+  productDetails.textContent = product.description;
+  productDetails.classList.add("carousel-details");
+
   const priceArea = document.createElement("div");
   priceArea.classList.add("carousel-price");
 
@@ -106,11 +135,15 @@ function createSlide(product) {
   }
 
   const cta = document.createElement("a");
-  cta.classList.add("cta-homepage", "cta");
+  cta.classList.add("cta");
   cta.textContent = "View product";
   cta.href = `product/index.html?id=${product.id}`;
 
-  slide.append(imageLink, name, priceArea, cta);
+  const carouselInfo = document.createElement("div");
+  carouselInfo.classList.add("carousel-info");
+  carouselInfo.append(name, productDetails, priceArea, cta);
+  slide.append(imageLink, carouselInfo);
+
   return slide;
 }
 

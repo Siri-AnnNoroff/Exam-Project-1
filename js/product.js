@@ -160,7 +160,7 @@ function buildSingleProduct(product) {
   rated.append(ratedLabel, " ", ratedNumber, " ", ratedStars);
 
   const reviewsSection = document.createElement("section");
-  reviewsSection.classList.add("reviews");
+  reviewsSection.classList.add("reviews-section");
 
   const reviewsHeading = document.createElement("h2");
   reviewsHeading.classList.add("reviews-heading");
@@ -175,7 +175,7 @@ function buildSingleProduct(product) {
   } else {
     const reviewCards = product.reviews.map((review) => {
       const reviewCard = document.createElement("div");
-      reviewCard.classList.add("review");
+      reviewCard.classList.add("single-review");
 
       const reviewStars = document.createElement("span");
       reviewStars.classList.add("stars");
