@@ -218,7 +218,7 @@ function buildGrid(grid, product) {
   name.textContent = product.title;
 
   const priceArea = document.createElement("div");
-  priceArea.classList.add("carousel-price");
+  priceArea.classList.add("price-area");
 
   const price = document.createElement("p");
   price.textContent = currencySymbol + product.price;

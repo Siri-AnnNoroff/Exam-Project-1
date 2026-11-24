@@ -126,7 +126,7 @@ function buildSingleProduct(product) {
   const cartBtn = document.createElement("a");
   cartBtn.textContent = "Go to cart";
   cartBtn.href = "../cart/index.html";
-  cartBtn.classList.add("cta");
+  cartBtn.classList.add("secondary-cta");
 
   info.append(
     name,

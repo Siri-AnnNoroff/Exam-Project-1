@@ -170,29 +170,50 @@ img {
   text-decoration: line-through;
 }
 
+.price-area {
+  margin-bottom: 1rem;
+}
+
 .onSale {
     font-weight: 600;
     color: var(--red-contrast-color);
 }
-
+button {
+  border: none;
+}
 .cta {
   display: block;
-  width: 50%;
-  padding: 15px 0;
+  width: 100%;
+  padding: 10px 0;
   background-color: var(--red-contrast-color);
   color: var(--light-text-color);
   text-align: center;
   text-transform: uppercase;
   font-size: 1.1rem;
   border-radius: 15px;
-  margin: 1rem 0;
   cursor: pointer;
   justify-self: center;
+  margin-top: auto;
+  margin-bottom: 8px;
 }
 
-.cta-homepage {
-  margin-top: auto;
+.secondary-cta {
+ display: block;
   width: 100%;
+  padding: 10px 0;
+  border: 1px solid var(--dark-text-color);
+  background-color: rgb(168, 167, 167);
+  color: var(--dark-text-color);
+  text-align: center;
+  text-transform: uppercase;
+  font-size: 1.1rem;
+  border-radius: 15px;
+  cursor: pointer;
+}
+
+.cta:hover, .secondary-cta:hover {
+  box-shadow: rgba(7, 7, 6, 0.911) 0 -25px 18px -14px inset,rgb(39, 7, 1) 0 2px 4px;
+  transform: translateY(-2px);
 }
 
 .carousel-arrow {
@@ -252,6 +273,10 @@ img {
   justify-content: center;
 }
 
+.product-box p {
+  margin: 0.5rem 0 0;
+}
+
 .product-box {
   box-shadow: var(--box-shadow);
   border-radius: 15px;
@@ -261,8 +286,9 @@ img {
 }
 
 .product-box img {
-    height: clamp(200px, 22vw, 320px);
     width: 100%;
+    aspect-ratio: 1/1;
+    height: auto;
     object-fit: cover;
     box-shadow: var(--box-shadow);
   }
@@ -346,8 +372,7 @@ input {
 
 .share-btn {
   background: none;
-  border: none;
-  justify-self: left;
+  margin-bottom: 12px;
   align-self: flex-start;
   font-size: 1rem;
   cursor: pointer;
@@ -378,6 +403,7 @@ input {
 .product-info {
   flex: 1 1 0;
   min-width: 0;
+  max-width: 500px;
   display: flex;
   flex-direction: column;
 }
@@ -565,7 +591,7 @@ input {
   animation-delay: 1s;
   animation-duration: 2s;
    @media (prefers-reduced-motion: reduce) {
-      transition: none;
+      animation: none;
     };
 }
 

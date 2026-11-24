@@ -24,7 +24,7 @@ if (isLoggedIn) {
   cta.href = "../index.html";
 
   const logOutBtn = document.createElement("button");
-  logOutBtn.classList.add("cta");
+  logOutBtn.classList.add("secondary-cta");
   logOutBtn.textContent = "Sign out";
   logOutBtn.addEventListener("click", () => {
     localStorage.removeItem("accessToken");
