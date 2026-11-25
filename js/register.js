@@ -77,7 +77,7 @@ form.addEventListener("submit", async (event) => {
     await registerUser(values);
     showMessage("Account created! Redirecting to login...", "success");
     setTimeout(() => {
-      window.location.href = "/account/login.html";
+      window.location.href = "account/login.html";
     }, 2000);
   } catch (error) {
     showMessage(error.message);
