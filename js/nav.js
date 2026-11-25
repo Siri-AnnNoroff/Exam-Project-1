@@ -1,6 +1,6 @@
 "use strict";
 
-const filterPage = "../index.html";
+const filterPage = new URL("../index.html", import.meta.url).href;
 const API = "https://v2.api.noroff.dev/online-shop";
 
 export const categories = {
