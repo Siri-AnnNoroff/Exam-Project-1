@@ -127,6 +127,6 @@ loginForm.addEventListener("submit", async (event) => {
       window.location.href = "../index.html";
     }, 1000);
   } catch (error) {
-    showMessage("Unable to log in");
+    showMessage("User not found");
   }
 });
