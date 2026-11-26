@@ -102,7 +102,11 @@ function productsInCart() {
 
     removeBtn.addEventListener("click", () => {
       deleteProduct(product);
-      showToast("You have removed " + product.title + " from your cart!");
+      showToast(
+        `You have removed ${product.title} from your cart!`,
+        "success",
+        { showCta: false },
+      );
     });
     card.append(link, quantitySection, rowTotal, removeBtn);
     cartSection.appendChild(card);
