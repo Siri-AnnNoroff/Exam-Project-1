@@ -107,11 +107,6 @@ function buildSingleProduct(product) {
   tags.classList.add("product-tags");
   tags.textContent = "Tags: " + product.tags.join(" / ");
 
-  const cartBtn = document.createElement("a");
-  cartBtn.textContent = "Go to cart";
-  cartBtn.href = "../cart/index.html";
-  cartBtn.classList.add("secondary-cta", "cta");
-
   let cta;
   if (isLoggedIn) {
     cta = document.createElement("button");
@@ -128,10 +123,15 @@ function buildSingleProduct(product) {
     cta.href = "../account/login.html";
   }
 
+  const cartBtn = document.createElement("a");
+  cartBtn.textContent = "Go to cart";
+  cartBtn.href = "../cart/index.html";
+  cartBtn.classList.add("secondary-cta", "cta");
+
   const ctaArea = document.createElement("div");
   ctaArea.classList.add("cta-area");
-  ctaArea.appendChild(cartBtn);
   ctaArea.appendChild(cta);
+  ctaArea.appendChild(cartBtn);
 
   info.append(
     name,

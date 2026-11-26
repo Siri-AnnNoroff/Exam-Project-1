@@ -194,7 +194,6 @@ button {
   cursor: pointer;
   justify-self: center;
   margin-top: auto;
-  margin-bottom: 8px;
 }
 
 .secondary-cta {
@@ -209,11 +208,6 @@ button {
   font-size: 1.1rem;
   border-radius: 15px;
   cursor: pointer;
-}
-
-.cta-area {
-  display: flex;
-  gap: 1rem;
 }
 
 .cta:hover, .secondary-cta:hover {
