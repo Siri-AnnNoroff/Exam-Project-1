@@ -18,6 +18,9 @@ if (isLoggedIn) {
   loginMessage.classList.add("login-message");
   loginMessage.textContent = "You are already logged in";
 
+  const ctaArea = document.createElement("div");
+  ctaArea.classList.add("cta-area");
+
   cta = document.createElement("a");
   cta.classList.add("cta");
   cta.textContent = "Back to products";
@@ -33,7 +36,9 @@ if (isLoggedIn) {
     window.location.reload();
   });
 
-  loginPage.append(loginMessage, cta, logOutBtn);
+  ctaArea.append(logOutBtn, cta);
+
+  loginPage.append(loginMessage, ctaArea);
 }
 
 function showMessage(text, type = "error") {
