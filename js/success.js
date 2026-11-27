@@ -35,7 +35,12 @@ function buildSuccessPage() {
     ".",
   );
 
-  successPage.append(h2, successIcon, confirmationText);
+  const backBtn = document.createElement("a");
+  backBtn.classList.add("cta");
+  backBtn.href = "../index.html";
+  backBtn.textContent = "Back to products";
+
+  successPage.append(h2, successIcon, confirmationText, backBtn);
 }
 
 buildSuccessPage();

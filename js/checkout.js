@@ -7,8 +7,10 @@ const currencySymbol = "$";
 const cartSection = document.getElementById("cart-section");
 const completePurchaseBtn = document.getElementById("complete-purchase");
 
-completePurchaseBtn.addEventListener("click", () => {
+form.addEventListener("submit", (e) => {
+  e.preventDefault();
   setCart([]);
+  window.location.href = "../success.index.html";
 });
 
 function listTop() {

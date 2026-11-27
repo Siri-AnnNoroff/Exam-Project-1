@@ -5,7 +5,7 @@ import { addToCart } from "./cart-logic.js";
 import { categories } from "./nav.js";
 
 let currentPage = 1;
-const limit = 8;
+const limit = 12;
 let allProducts = [];
 const activeCategory = new URLSearchParams(window.location.search).get(
   "category",
