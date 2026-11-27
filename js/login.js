@@ -36,7 +36,7 @@ if (isLoggedIn) {
     window.location.reload();
   });
 
-  ctaArea.append(logOutBtn, cta);
+  ctaArea.append(cta, logOutBtn);
 
   loginPage.append(loginMessage, ctaArea);
 }
