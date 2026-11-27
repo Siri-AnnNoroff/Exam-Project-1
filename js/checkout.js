@@ -5,12 +5,11 @@ import { getCart, setCart, addToCart } from "./cart-logic.js";
 const API = "https://v2.api.noroff.dev";
 const currencySymbol = "$";
 const cartSection = document.getElementById("cart-section");
-const completePurchaseBtn = document.getElementById("complete-purchase");
 
 form.addEventListener("submit", (e) => {
   e.preventDefault();
   setCart([]);
-  window.location.href = "../success.index.html";
+  window.location.href = "../success/index.html";
 });
 
 function listTop() {
